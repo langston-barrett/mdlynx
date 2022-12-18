@@ -1,10 +1,12 @@
 [package]
 name = "mdlynx"
-version = "0.0.0"
+version = "0.1.0"
 authors = ["Langston Barrett <langston.barrett@gmail.com>"]
 keywords = ["broken-link", "cli", "markdown"]
 edition = "2021"
 description = "Small, fast utility to find broken file links in Markdown documents"
+license = "MIT"
+homepage = "https://github.com/langston-barrett/mdlynx"
 
 [dependencies]
 anyhow = "1"
