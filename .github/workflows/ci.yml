@@ -1,32 +1,16 @@
-name: CI
-
+name: ci
 on:
   push:
     branches:
     - main
   pull_request:
 
-env:
-  # The NAME makes it easier to copy/paste snippets from other CI configs
-  NAME: mdlynx
+permissions:
+  contents: read
 
 jobs:
-  lint:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v3
-    - name: Format
-      run: cargo fmt --all --check
-    - name: Deps
-      run: |
-        rustup update
-        rustup component add clippy
-    - name: Lint
-      run: cargo clippy -- --deny warnings
-
-  test:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v3
-    - run: cargo build --locked
-    - run: cargo test --locked
+  ci:
+    uses: langston-barrett/gha/.github/workflows/rust-ci.yml@2836296ce750cde5dcba9866b62f82c019de540d
+    with:
+      bench: false
+      os: ubuntu-latest
