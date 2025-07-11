@@ -25,7 +25,7 @@ fn check_link(link: &str, path: &str, range: Range<usize>, verbose: bool) -> Res
     }
     if !Path::new(link)
         .try_exists()
-        .with_context(|| format!("Couldn't check if path exists: {}", link))?
+        .with_context(|| format!("Couldn't check if path exists: {link}"))?
     {
         println!("✗ {}:{}:{} {}", path, range.start, range.end, link);
         return Ok(false);
@@ -37,7 +37,7 @@ fn check_link(link: &str, path: &str, range: Range<usize>, verbose: bool) -> Res
 
 fn check_file(path: &str, verbose: bool) -> Result<bool> {
     let mut ok = true;
-    let md = std::fs::read_to_string(path).with_context(|| format!("Couldn't read {}", path))?;
+    let md = std::fs::read_to_string(path).with_context(|| format!("Couldn't read {path}"))?;
     for (ev, range) in pulldown_cmark::Parser::new(&md).into_offset_iter() {
         if let Event::Start(Tag::Link(_, link, _) | Tag::Image(_, link, _)) = ev {
             ok &= check_link(&link, path, range, verbose)?;
