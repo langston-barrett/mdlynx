@@ -5,15 +5,16 @@ Small, fast tool to find broken file links in Markdown documents.
 ## Features
 
 - Checks whether Markdown file link targets exist
-- Statically linked Linux binaries available
-- Fast, parallel
+- Precompiled binaries available
+- Fast
 - Friendly error messages
 - Safe, doesn't panic
-- 70 lines of code
+- 61 lines of code
 
 ## Non-Features
 
 - No recursive mode, use `find`/`xargs`/shell globs
+- Not parallel, use `xargs`, `make`, or `ninja`
 - Doesn't touch the network, doesn't check for broken web links
 
 ## Install

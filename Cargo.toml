@@ -12,11 +12,8 @@ homepage = "https://github.com/langston-barrett/mdlynx"
 anyhow = "1"
 clap = { version = "4.5", features = ["derive"] }
 pulldown-cmark = { version = "0.9", default-features = false, features = ["simd"] }
-rayon = { version = "1", optional = true }
 
-[features]
-default = ["parallel"]
-parallel = ["dep:rayon"]
-
+# https://nnethercote.github.io/perf-book/build-configuration.html
 [profile.release]
-lto = true
+codegen-units = 1
+lto = "fat"
