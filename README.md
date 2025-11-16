@@ -9,7 +9,7 @@ Small, fast tool to find broken file links in Markdown documents.
 - Fast, parallel
 - Friendly error messages
 - Safe, doesn't panic
-- 64 lines of code
+- 70 lines of code
 
 ## Non-Features
 

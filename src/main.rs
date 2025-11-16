@@ -1,5 +1,5 @@
 use std::ops::Range;
-use std::path::Path;
+use std::path::{Path, PathBuf};
 
 use anyhow::{Context, Result};
 use clap::Parser;
@@ -23,14 +23,20 @@ fn check_link(link: &str, path: &str, range: Range<usize>, verbose: bool) -> Res
     if link.starts_with("http://") || link.starts_with("https://") {
         return Ok(true);
     }
-    if !Path::new(link)
+    let link_str = &link[0..link.rfind('#').unwrap_or(link.len())];
+    let link = if let Some(parent) = PathBuf::from(path).parent() {
+        parent.join(link_str)
+    } else {
+        PathBuf::from(link_str)
+    };
+    if !Path::new(&link)
         .try_exists()
-        .with_context(|| format!("Couldn't check if path exists: {link}"))?
+        .with_context(|| format!("Couldn't check if path exists: {link_str}"))?
     {
-        println!("✗ {}:{}:{} {}", path, range.start, range.end, link);
+        println!("✗ {}:{}:{} {}", path, range.start, range.end, link_str);
         return Ok(false);
     } else if verbose {
-        println!("✓ {}:{}:{} {}", path, range.start, range.end, link);
+        println!("✓ {}:{}:{} {}", path, range.start, range.end, link_str);
     }
     Ok(true)
 }
@@ -61,4 +67,13 @@ fn main() -> Result<()> {
         .sum();
 
     std::process::exit(std::cmp::min(sum, 125));
+}
+
+#[cfg(test)]
+mod tests {
+    use super::check_link;
+    #[test]
+    fn test_anchor() {
+        assert!(check_link("README.md#foo", ".", 0..0, false).unwrap());
+    }
 }
