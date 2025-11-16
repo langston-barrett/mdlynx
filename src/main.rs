@@ -5,9 +5,6 @@ use anyhow::{Context, Result};
 use clap::Parser;
 use pulldown_cmark::{Event, Tag};
 
-#[cfg(feature = "parallel")]
-use rayon::prelude::*;
-
 /// Check local file links in Markdown files
 #[derive(Debug, clap::Parser)]
 pub struct Args {
@@ -54,18 +51,12 @@ fn check_file(path: &str, verbose: bool) -> Result<bool> {
 
 fn main() -> Result<()> {
     let args = Args::parse();
-
-    #[cfg(not(feature = "parallel"))]
     let files = args.file.into_iter();
-    #[cfg(feature = "parallel")]
-    let files = args.file.into_par_iter();
-
     let sum: i32 = files
         .map(|f| Ok(i32::from(!(check_file(&f, args.verbose)?))))
         .collect::<Result<Vec<i32>>>()?
         .into_iter()
         .sum();
-
     std::process::exit(std::cmp::min(sum, 125));
 }
 
