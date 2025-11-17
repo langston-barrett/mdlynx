@@ -2,6 +2,12 @@
 
 <!-- https://keepachangelog.com/en/1.0.0/ -->
 
+## [0.3.0] - 2025-11-17
+
+- Add GitHub actions
+
+[0.3.0]: https://github.com/langston-barrett/mdlynx/releases/tag/v0.3.0
+
 ## [0.2.0] - 2025-11-16
 
 - Handle relative paths and anchor links
