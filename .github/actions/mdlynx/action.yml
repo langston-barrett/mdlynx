@@ -1,0 +1,27 @@
+# Usage:
+#
+#     - uses: langston-barrett/mdlynx/.github/actions/mdlynx@SHA
+#
+
+name: mdlynx
+description: Install and run mdlynx
+inputs:
+  version:
+    description: version (without the leading 'v')
+    required: false
+    default: '0.2.0'
+  target:
+    description: Target triple
+    required: false
+    default: 'x86_64-unknown-linux-gnu'
+runs:
+  using: composite
+  steps:
+  - uses: langston-barrett/mdlynx/.github/actions/install-mdlynx@361d9d3c789ae8073bcccac664d2cedefee83668
+  # Runners have 4 cores as of 2025-11
+  # https://docs.github.com/en/actions/reference/runners/github-hosted-runners#standard-github-hosted-runners-for-public-repositories
+  - name: mdlynx
+    shell: bash
+    run: >
+      git ls-files --exclude-standard '*.md' |
+      xargs --max-args 1 --max-procs 4 mdlynx
