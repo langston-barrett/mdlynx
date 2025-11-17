@@ -14,3 +14,12 @@ jobs:
     with:
       bench: false
       os: ubuntu-latest
+
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v5 # zizmor: ignore[unpinned-uses] TODO
+      with:
+        persist-credentials: false
+    - uses: langston-barrett/mdlynx/.github/actions/install-mdlynx@361d9d3c789ae8073bcccac664d2cedefee83668
+    - run: mdlynx README.md
