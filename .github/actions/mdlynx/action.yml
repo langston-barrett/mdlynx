@@ -9,7 +9,7 @@ inputs:
   version:
     description: version (without the leading 'v')
     required: false
-    default: '0.2.0'
+    default: '0.3.0'
   target:
     description: Target triple
     required: false
@@ -17,7 +17,10 @@ inputs:
 runs:
   using: composite
   steps:
-  - uses: langston-barrett/mdlynx/.github/actions/install-mdlynx@361d9d3c789ae8073bcccac664d2cedefee83668
+  - uses: langston-barrett/mdlynx/.github/actions/install-mdlynx@v0.3.0
+    with:
+      version: ${{ inputs.version }}
+      target: ${{ inputs.target }}
   # Runners have 4 cores as of 2025-11
   # https://docs.github.com/en/actions/reference/runners/github-hosted-runners#standard-github-hosted-runners-for-public-repositories
   - name: mdlynx

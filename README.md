@@ -10,7 +10,10 @@ Small, fast tool to find broken file links in Markdown documents.
 - Friendly error messages
 - Safe, doesn't panic
 - 61 lines of code
-- [GitHub action](./.github/actions/install-mdlynx/action.yml)
+- GitHub actions:
+
+  - [`install-mdlynx`](./.github/actions/install-mdlynx/action.yml)
+  - [`mdlynx`](./.github/actions/mdlynx/action.yml)
 
 ## Non-Features
 
