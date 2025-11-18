@@ -42,8 +42,8 @@ fn check_file(path: &str, verbose: bool) -> Result<bool> {
     let mut ok = true;
     let md = std::fs::read_to_string(path).with_context(|| format!("Couldn't read {path}"))?;
     for (ev, range) in pulldown_cmark::Parser::new(&md).into_offset_iter() {
-        if let Event::Start(Tag::Link(_, link, _) | Tag::Image(_, link, _)) = ev {
-            ok &= check_link(&link, path, range, verbose)?;
+        if let Event::Start(Tag::Link { dest_url, .. } | Tag::Image { dest_url, .. }) = ev {
+            ok &= check_link(dest_url.as_ref(), path, range, verbose)?;
         };
     }
     Ok(ok)
