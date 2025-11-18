@@ -17,7 +17,7 @@ pub struct Args {
 }
 
 fn check_link(link: &str, path: &str, range: Range<usize>, verbose: bool) -> Result<bool> {
-    if link.starts_with("http://") || link.starts_with("https://") {
+    if link.starts_with("http://") || link.starts_with("https://") || link.starts_with("mailto:") {
         return Ok(true);
     }
     let link_str = &link[0..link.rfind('#').unwrap_or(link.len())];
