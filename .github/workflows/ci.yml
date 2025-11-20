@@ -1,9 +1,12 @@
-name: ci
+name: rust ci
 on:
   push:
     branches:
     - main
   pull_request:
+    # Don't run on documentation-only changes
+    paths-ignore: ["**.md"]
+  workflow_dispatch:
 
 permissions:
   contents: read
