@@ -17,7 +17,7 @@ inputs:
 runs:
   using: composite
   steps:
-  - uses: langston-barrett/mdlynx/.github/actions/install-mdlynx@v0.3.0
+  - uses: langston-barrett/mdlynx/.github/actions/install-mdlynx@v0.3.0 # zizmor: ignore[unpinned-uses] TODO
     with:
       version: ${{ inputs.version }}
       target: ${{ inputs.target }}
