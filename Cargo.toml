@@ -11,7 +11,9 @@ homepage = "https://github.com/langston-barrett/mdlynx"
 [dependencies]
 anyhow = "1"
 clap = { version = "4.5", features = ["derive"] }
-pulldown-cmark = { version = "0.13", default-features = false, features = ["simd"] }
+pulldown-cmark = { version = "0.13", default-features = false, features = [
+  "simd",
+] }
 
 # https://nnethercote.github.io/perf-book/build-configuration.html
 [profile.release]
