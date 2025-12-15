@@ -2,5 +2,4 @@
 /mdlynx
 /target/
 
-*.ninja
-/.out/
+/.lun/
